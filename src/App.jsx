@@ -3,8 +3,6 @@ import { useState } from 'react'
 import './App.css'
 import Carts from './Components/Carts'
 import Products from './Components/Products'
-import CartProd from './Components/CartProd'
-
 function App() {
 
   const [carts , setCarts] = useState([])
@@ -15,10 +13,10 @@ function App() {
           const exists = prev.some(p => p.id === product.id); 
 
           if(exists){
-            return prev.map((prod) => prod.id === product.id ? {...prod, cartQuantity: prod.cartQuantity + 1 } : prod)
+            return prev.map((prod) => prod.id === product.id ? {...prod, cartQuantity: prod.cartQuantity + 1 ,stock : prod.stock - 1 } : prod)
           }
           else{
-            return [...prev, {...product, cartQuantity: 1}]
+            return [...prev, {...product, cartQuantity: 1 }]
           }
       })
   }
