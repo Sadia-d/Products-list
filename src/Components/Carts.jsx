@@ -1,31 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import CartProd from './CartProd';
+import React from 'react';
+import Cart from './Cart';
 
-const Carts = ({ carts }) => {
-
-    const [totalPrice, setTotalPrice] = useState(0);
-
-    useEffect(() => {
-        const tPrice = carts.reduce((acc, curr) => (
-            acc += curr.cartQuantity * curr.price
-        ), 0)
-        setTotalPrice(tPrice);
-    }, [carts])
-
+const Carts = ({carts}) => {
     return (
-        <div className='mt-8'>
-            <h1>Here is your added products : {carts.length}</h1>
-            <div>
-                <ul className='mb-3'>
-                    {
-                        carts?.map((cart) => <CartProd cart={cart}></CartProd>)
-                    }
-                </ul>
-                  <hr />
-              <div className='flex justify-between p-5 m'>
-                <p className='font-bold text-2xl text-green-500'>Total Price : </p> <p className='font-bold text-2xl text-green-500'>${totalPrice}</p>
-            </div>
-            </div>
+        <div>
+            <h1 className='text-xl font-bold'>Here is your added product : {carts.length}</h1>
+
+            <ul>
+                {
+                   carts.map(cart => <Cart
+                   key={cart.id}
+                     cart={cart}></Cart>)
+                }
+            </ul>
         </div>
     );
 };

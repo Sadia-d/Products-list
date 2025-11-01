@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Product = ({ product ,handleCardUpdate}) => {
+const Product = ({ product,handleCartsAdded }) => {
     const { name, category, price, rating, image,description } = product;
 
     return (
@@ -24,7 +24,7 @@ const Product = ({ product ,handleCardUpdate}) => {
                         <div  className="badge badge-outline border-none text-white py-2 bg-blue-500">${price}</div>
                     </div>
                     <div className='flex gap-2 w-full mt-5'>
-                        <button onClick={()=>handleCardUpdate(product)} className='btn btn-success btn-outline w-[50%]'>Add to cart</button>
+                        <button onClick={()=>handleCartsAdded(product)}  className='btn btn-success btn-outline w-[50%]'>Add to cart</button>
                         <button className='btn btn-secondary btn-outline w-[50%]'>Buy now</button>
                     </div>
                 </div>
