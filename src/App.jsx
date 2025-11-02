@@ -11,17 +11,28 @@ function App() {
 
   const handleCartsAdded = product =>{
     setCarts((prev) => {
-      const exist = prev.some(p => p.id === product.id)
+      const exist = prev.find(p => p.id === product.id)
       if(exist){
+
+         if (exist.stock <= 0) {      
+        alert('Stock out!');
+        return prev;
+      }
+
        return prev.map(prod => prod.id === product.id ?{ ...prod , cartQuantity : prod.cartQuantity + 1 , stock : prod.stock - 1} : prod)
       }
+    
       else{
-        return [...prev, { ...product, cartQuantity: 1 }]
+        return [...prev, { ...product, cartQuantity: 1 , stock: product.stock - 1}]
       }
     })
   }
 
  
+  const handleRemove = (id) => {
+  setCarts((prev) => prev.filter((item) => item.id !== id));
+};
+
   
 
   return (
@@ -35,7 +46,7 @@ function App() {
           </div>
 
           <div className='w-[30%] mt-7'>
-             <Carts carts={carts}  > </Carts>
+             <Carts handleRemove={handleRemove} carts={carts}  > </Carts>
           </div>
      
         </div>
